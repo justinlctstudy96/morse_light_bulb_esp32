@@ -1,0 +1,2 @@
+#define PIN_LIGHT_BULB 4
+#define PIN_BUTTON_1 19
