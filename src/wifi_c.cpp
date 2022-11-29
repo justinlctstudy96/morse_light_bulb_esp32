@@ -14,11 +14,12 @@ void wifi_init(){
     WiFi.setAutoReconnect(true);
     WiFi.persistent(true);
     Serial.print("connecting to WiFi ");
+    int count = 0;
     while(WiFi.status() != WL_CONNECTED){
-    // while (WiFi.localIP().toString() == "0.0.0.0") {
-    // while (!WiFi.localIP().isSet()) {
         Serial.print('.');
         delay(100);
+        count++;
+        if (count>100) ESP.restart();
     }
 }
 

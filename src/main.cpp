@@ -16,6 +16,7 @@ void setup() {
   pinMode(PIN_LIGHT_BULB, OUTPUT);
   digitalWrite(PIN_LIGHT_BULB, LOW);
   pinMode(PIN_BUTTON_1, INPUT_PULLUP);
+  pinMode(PIN_BUTTON_2, INPUT_PULLUP);
 
   Serial.println("Serial Begin.");
 
@@ -26,12 +27,22 @@ void setup() {
   //mqtt init
   mqtt_init();
   Serial.println("MQTT Inited.");
+
+  // String temp = "trashh";
+  NVS.begin();
+  nvs_setstr_var(GET_VAR_NAME(WIFI_ST_SSID), "trashh");
+  nvs_get_config();
+  Serial.print("ssid: ");
+  Serial.println(WIFI_ST_SSID);
 }
 
 void loop() {
   mqtt_loop();
   if (digitalRead(PIN_BUTTON_1) == 0) {
-    Serial.println("pushed");
+    Serial.println("1pushed");
+  }
+  if (digitalRead(PIN_BUTTON_2) == 0) {
+    Serial.println("2pushed");
   }
   // Serial.println(digitalRead(PIN_BUTTON_1));
   if(millis() - p_time >= 5000) {

@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <WiFi.h>
+#include <config.h>
 
 void wifi_init();
 bool wifi_stat();
