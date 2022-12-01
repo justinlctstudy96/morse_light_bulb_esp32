@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>ChiChun Light Bulb</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1>ChiChun Light Bulb</h1>
+    <div id="current-st-config">
+        <div>Current WiFi Station Configuration: </div>
+        <div>SSID: %CURRENTSTSSID%</div>
+        <div>PW: %CURRENTSTPW%</div>
+    </div>
+    <form action="/wifi_st_config" target="hidden-form">
+        WiFi Station Update:
+        <br> <input type="text" name="input_st_ssid" placeholder="SSID">
+        <br> <input type="text" name="input_st_pw" placeholder="Password">
+        <input type="submit" value="submit">
+    </form>
+</body>
+<script></script>
+
+</html>

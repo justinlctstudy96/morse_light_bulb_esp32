@@ -5,6 +5,7 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
+#include <wifi_c.h>
 
 //extern WiFiClient espClient;
 //extern PubSubClient client(WiFiClient);
@@ -18,7 +19,8 @@ extern char* MQTT_TOPIC_SERVER;
 void mqtt_connect(char* client);
 void mqtt_connect_server(char* server, uint16_t port, char* client);
 void mqtt_connect_check();
-void mqtt_pub(String content, char* topic);
+void wifi_mqtt_connect_check();
+void mqtt_pub(String content, char* topic, boolean retained);
 void mqtt_sub(char* topic);
 void on_msg(char* topic, byte* payload, unsigned int length);
 void mqtt_loop();

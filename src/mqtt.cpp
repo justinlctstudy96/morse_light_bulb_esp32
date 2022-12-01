@@ -13,7 +13,9 @@ char* MQTT_TOPIC_SUB = "/chun";
 
 void mqtt_connect(char* client){
     mqttclient.connect(client);
-    Serial.println("mqtt connected as \"" + String(MQTT_CLIENT_NAME)+"\"");
+    if (mqttclient.connected()) {
+      Serial.println("MQTT: Connected as \"" + String(MQTT_CLIENT_NAME)+"\"");
+    }
 }
 
 void mqtt_connect_server(char* server, uint16_t port, char* client){
@@ -25,27 +27,37 @@ void mqtt_connect_server(char* server, uint16_t port, char* client){
 
 void mqtt_connect_check(){
   if (!mqttclient.connected()) {
-    Serial.println("mqtt broker not connected. Reconnecting ...");
+    if (!wifi_stat()) {
+      Serial.println("MQTT: WiFi not connected");
+      return;
+    }
+    Serial.println("MQTT: Broker not connected. Reconnecting ...");
     mqtt_connect(MQTT_CLIENT_NAME);
     mqtt_sub(MQTT_TOPIC_SUB);
     delay(500);
   }
 }
 
-void mqtt_pub(String content, char* topic){
+void wifi_mqtt_connect_check(){
+  wifi_connect_check();
   mqtt_connect_check();
-  mqttclient.publish(topic, content.c_str());
-  Serial.println("published");
+}
+
+void mqtt_pub(String content, char* topic, boolean retained = false){
+  wifi_mqtt_connect_check();
+  mqttclient.publish(topic, content.c_str(), retained);
+  Serial.println("MQTT: Publish \"" + content + "\" to topic \"" + String(topic) + "\"");
 }
 
 void mqtt_sub(char* topic) {
+  wifi_mqtt_connect_check();
   MQTT_TOPIC_SUB = topic;
   mqttclient.subscribe(MQTT_TOPIC_SUB, 0);
   mqttclient.setCallback(on_msg);
 }
 
 void on_msg(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Received message from ");
+  Serial.print("MQTT: Received message from ");
   Serial.print(topic);
   Serial.print(": ");
   for (int i = 0; i<length; i++) {
