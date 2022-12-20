@@ -6,6 +6,7 @@ char WIFI_AP_SSID[100] = "chi";
 char WIFI_AP_PW[100] = "05270625";
 char MQTT_PUB_TOPIC[100] = "chi";
 char MQTT_SUB_TOPIC[100] = "chi";
+int MORSE_RECORD_TIMEOUT = 3000;
 
 void pin_init() {
     delay(10);

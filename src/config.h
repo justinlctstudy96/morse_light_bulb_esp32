@@ -17,6 +17,7 @@ extern char WIFI_AP_SSID[100];
 extern char WIFI_AP_PW[100];
 extern char MQTT_PUB_TOPIC[100];
 extern char MQTT_SUB_TOPIC[100];
+extern int MORSE_RECORD_TIMEOUT;
 
 void pin_init();
 void nvs_update_config();

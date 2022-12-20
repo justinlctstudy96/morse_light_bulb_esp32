@@ -33,6 +33,7 @@ void setup() {
 void loop() {
   mqtt_loop();
   morse_btns_check();
+  state_one_record_timeout_check();
   if(millis() - p_time >= 5000) {
     p_time = millis();
   // Serial.println("-----------------------" + String(millis()) + "-----------------------");
