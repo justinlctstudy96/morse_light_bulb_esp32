@@ -14,11 +14,8 @@ void setup() {
   while(!Serial) {}
   Serial.println("Serial Begin.");
 
-  delay(10);
-  pinMode(PIN_LIGHT_BULB, OUTPUT);
-  digitalWrite(PIN_LIGHT_BULB, LOW);
-  pinMode(PIN_BUTTON_1, INPUT_PULLUP);
-  pinMode(PIN_BUTTON_2, INPUT_PULLUP);
+  // pin mode init
+  pin_init();
 
   // non-volatiled storage init
   nvs_init();
@@ -34,7 +31,7 @@ void setup() {
 }
 
 void loop() {
-  // mqtt_loop();
+  mqtt_loop();
   morse_btns_check();
   if(millis() - p_time >= 5000) {
     p_time = millis();
@@ -43,5 +40,4 @@ void loop() {
   // JSON_decode("s");
     // mqtt_pub("eofijasf", MQTT_PUB_TOPIC, false);
   }
-
 }

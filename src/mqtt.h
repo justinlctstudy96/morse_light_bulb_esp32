@@ -6,6 +6,7 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include <wifi_c.h>
+#include <morse_logic.h>
 
 //extern WiFiClient espClient;
 //extern PubSubClient client(WiFiClient);
@@ -16,7 +17,7 @@ extern char* MQTT_CLIENT_NAME;
 
 extern char* MQTT_TOPIC_SERVER;
 
-void mqtt_connect(char* client);
+bool mqtt_connect(char* client);
 void mqtt_connect_server(char* server, uint16_t port, char* client);
 void mqtt_connect_check();
 void wifi_mqtt_connect_check();

@@ -5,7 +5,22 @@ char WIFI_ST_PW[100] = "";
 char WIFI_AP_SSID[100] = "chi";
 char WIFI_AP_PW[100] = "05270625";
 char MQTT_PUB_TOPIC[100] = "chi";
-char MQTT_SUB_TOPIC[100] = "chun";
+char MQTT_SUB_TOPIC[100] = "chi";
+
+void pin_init() {
+    delay(10);
+    // output
+    pinMode(PIN_LIGHT_BULB, OUTPUT);
+    digitalWrite(PIN_LIGHT_BULB, LOW);
+    pinMode(PIN_LIGHT_BTN_STATE, OUTPUT);
+    digitalWrite(PIN_LIGHT_BTN_STATE, LOW);
+    pinMode(PIN_LIGHT_BTN_CONNECTED, OUTPUT);
+    digitalWrite(PIN_LIGHT_BTN_CONNECTED, LOW);
+    // input
+    pinMode(PIN_BTN_MORSE, INPUT_PULLUP);
+    pinMode(PIN_BTN_MODE, INPUT_PULLUP);
+    pinMode(PIN_BTN_BULB, INPUT_PULLUP);
+}
 
 void nvs_update_config() {
     NVS.begin();

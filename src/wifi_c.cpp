@@ -35,8 +35,11 @@ bool wifi_stat() { // connected will return true
 
 void wifi_connect_check() {
     if (!wifi_stat()) {
+        digitalWrite(PIN_LIGHT_BTN_CONNECTED, LOW);
         Serial.println("WiFi: Reconnecting...");
         wifi_init();
         delay(500);
+        return;
     }
+    digitalWrite(PIN_LIGHT_BTN_CONNECTED, HIGH);
 }
